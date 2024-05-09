@@ -13,9 +13,7 @@ class MyCartImageAndDetialsContainer extends StatelessWidget {
       child: Stack(
         children: [
           Center(
-            child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Image.asset(Assets.imagesBasketImage)),
+            child: Image.asset(Assets.imagesBasketImage),
           ),
           const Positioned(
             top: 12,
