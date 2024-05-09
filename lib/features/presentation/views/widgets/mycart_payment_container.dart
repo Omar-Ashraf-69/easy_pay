@@ -1,4 +1,3 @@
-
 import 'package:easy_pay/core/utils/app_images.dart';
 import 'package:easy_pay/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +9,21 @@ class MyCartImageAndDetialsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(
-          child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Image.asset(Assets.imagesBasketImage)),
-        ),
-        const Positioned(
-          top: 12,
-          right: 10,
-          child: CartDetailsPopUpWidget(),
-        ),
-      ],
+    return Expanded(
+      child: Stack(
+        children: [
+          Center(
+            child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Image.asset(Assets.imagesBasketImage)),
+          ),
+          const Positioned(
+            top: 12,
+            right: 10,
+            child: CartDetailsPopUpWidget(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -100,8 +101,7 @@ class ItemCounterWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 '-',
                 style: Styles.style18(context),
@@ -128,8 +128,7 @@ class ItemCounterWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 '+',
                 style: Styles.style18(context),
