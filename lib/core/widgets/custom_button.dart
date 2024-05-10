@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 
 class CustomPayButton extends StatelessWidget {
@@ -16,7 +14,7 @@ class CustomPayButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
             color: const Color(0xFF34A853),
             borderRadius: BorderRadius.circular(16)),

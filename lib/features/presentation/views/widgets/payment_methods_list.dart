@@ -1,4 +1,5 @@
 
+import 'package:easy_pay/core/utils/app_images.dart';
 import 'package:easy_pay/features/presentation/views/widgets/payment_method_item.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,8 @@ class PaymentMethodsList extends StatefulWidget {
   @override
   const PaymentMethodsList({
     super.key,
-    required this.images,
   });
 
-  final List<String> images;
 
   @override
   State<PaymentMethodsList> createState() => _PaymentMethodsListState();
@@ -17,12 +16,16 @@ class PaymentMethodsList extends StatefulWidget {
 
 class _PaymentMethodsListState extends State<PaymentMethodsList> {
   int selectedIndex = 0;
+  final List<String> images = const [
+    Assets.imagesCard,
+    Assets.imagesPaypal,
+  ];
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         PaymentMethodItem(
-          image: widget.images[0],
+          image: images[0],
           onTap: () {
             selectedIndex = 0;
             setState(() {});
@@ -33,7 +36,7 @@ class _PaymentMethodsListState extends State<PaymentMethodsList> {
           width: 16,
         ),
         PaymentMethodItem(
-          image: widget.images[1],
+          image: images[1],
           onTap: () {
             selectedIndex = 1;
             setState(() {});

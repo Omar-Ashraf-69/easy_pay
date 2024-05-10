@@ -1,5 +1,4 @@
 import 'package:easy_pay/features/presentation/views/widgets/payment_details_view_body.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PaymentDetailsView extends StatelessWidget {

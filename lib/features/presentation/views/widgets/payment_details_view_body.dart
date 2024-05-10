@@ -1,4 +1,3 @@
-import 'package:easy_pay/core/utils/app_images.dart';
 import 'package:easy_pay/core/widgets/custom_appbar.dart';
 import 'package:easy_pay/core/widgets/custom_button.dart';
 import 'package:easy_pay/features/presentation/views/thank_you_view.dart';
@@ -17,10 +16,7 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  final List<String> images = const [
-    Assets.imagesCard,
-    Assets.imagesPaypal,
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +26,8 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: PaymentMethodsList(images: images),
+            const SliverToBoxAdapter(
+              child: PaymentMethodsList(),
             ),
             const SliverToBoxAdapter(
               child: SizedBox(
