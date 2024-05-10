@@ -1,5 +1,6 @@
-import 'package:easy_pay/core/utils/app_styles.dart';
-import 'package:easy_pay/features/presentation/views/widgets/cart_details_row.dart';
+import 'package:easy_pay/features/presentation/views/widgets/custom_details_row.dart';
+import 'package:easy_pay/features/presentation/views/widgets/custom_divider.dart';
+import 'package:easy_pay/features/presentation/views/widgets/total_price_row.dart';
 import 'package:flutter/material.dart';
 
 class CartPaymentDetials extends StatelessWidget {
@@ -7,36 +8,30 @@ class CartPaymentDetials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const CartDetailsRowWidget(
+        DetailsRowWidget(
           label: "Order Subtotal",
-          orderAmount: "\$42.97",
+          details: "\$42.97",
         ),
-        const SizedBox(
+        SizedBox(
           height: 3,
         ),
-        const CartDetailsRowWidget(
+        DetailsRowWidget(
           label: "Discount",
-          orderAmount: "\$0",
+          details: "\$0",
         ),
-        const SizedBox(
+        SizedBox(
           height: 3,
         ),
-        const CartDetailsRowWidget(
+        DetailsRowWidget(
           label: "Shipping",
-          orderAmount: "\$8",
+          details: "\$8",
         ),
-        const Divider(
-          endIndent: 12,
-          indent: 12,
-          height: 34,
-          color: Colors.grey,
-        ),
-        CartDetailsRowWidget(
-          label: "Total",
-          orderAmount: "\$50.97",
-          textStyle: Styles.style24(context),
+                  CustomDivider(),
+
+        TotalPriceRowWidget(
+          amount: '50.97',
         ),
       ],
     );

@@ -9,24 +9,22 @@ class ThankYouViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.all(32.0),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              ThankYouCard(),
-              CustomDashedLine(),
-              SidedCircleAvatar(
-                isRightCircle: false,
-              ),
-              SidedCircleAvatar(
-                isRightCircle: true,
-              ),
-              CustomCheckIcon(),
-            ],
-          ),
+    return const Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 16),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            ThankYouCard(),
+            CustomDashedLine(),
+            SidedCircleAvatar(
+              isRightCircle: false,
+            ),
+            SidedCircleAvatar(
+              isRightCircle: true,
+            ),
+            CustomCheckIcon(),
+          ],
         ),
       ),
     );

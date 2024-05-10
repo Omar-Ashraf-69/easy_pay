@@ -1,16 +1,16 @@
-
 import 'package:easy_pay/core/utils/app_styles.dart';
 import 'package:flutter/cupertino.dart';
 
-class CartDetailsRowWidget extends StatelessWidget {
-  const CartDetailsRowWidget({
+class DetailsRowWidget extends StatelessWidget {
+  const DetailsRowWidget({
     super.key,
     required this.label,
-    required this.orderAmount,
-    this.textStyle,
+    required this.details,
+    this.labelStyle,
+    this.detailsStyle
   });
-  final String orderAmount, label;
-  final TextStyle? textStyle;
+  final String label, details;
+  final TextStyle? labelStyle,detailsStyle;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,11 +18,11 @@ class CartDetailsRowWidget extends StatelessWidget {
       children: [
         Text(
           label,
-          style: textStyle ?? Styles.style18(context),
+          style: labelStyle ?? Styles.style18(context),
         ),
         Text(
-          orderAmount,
-          style: textStyle ?? Styles.style18(context),
+          details,
+          style: detailsStyle ?? Styles.style18(context),
         ),
       ],
     );

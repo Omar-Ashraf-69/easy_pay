@@ -20,5 +20,13 @@ class Assets {
   /// Assets for imagesPaypal
   /// assets/images/paypal.svg
   static const String imagesPaypal = "assets/images/paypal.svg";
+
+  /// Assets for imagesSVGRepoIconCarrier
+  /// assets/images/SVGRepo_iconCarrier.svg
+  static const String imagesSVGRepoIconCarrier = "assets/images/SVGRepo_iconCarrier.svg";
+
+  /// Assets for imagesSVGRepoIconCarrier
+  /// assets/images/SVGRepo_iconCarrier.png
+  static const String imagesSVGRepoIconCarrierSvg = "assets/images/SVGRepo_iconCarrier.png";
 }
 
