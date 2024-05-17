@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:easy_pay/features/data/models/payment_intent_input_model.dart';
 import 'package:easy_pay/core/utils/api_keys.dart';
@@ -20,10 +18,11 @@ class StripeServices {
     return PaymentIntentModel.fromJson(response);
   }
 
-  Future<void> initPaymentSheet() async {
-    PaymentIntentModel paymentIntentModel = await createPaymentIntent(
-      payment: const PaymentIntentInputModel(currency: 'usd', amount: '50'),
-    );
+  Future<void> initPaymentSheet({
+    required PaymentIntentInputModel payment,
+  }) async {
+    PaymentIntentModel paymentIntentModel =
+        await createPaymentIntent(payment: payment);
     // 2. initialize the payment sheet
     await Stripe.instance.initPaymentSheet(
       paymentSheetParameters: SetupPaymentSheetParameters(
@@ -35,18 +34,10 @@ class StripeServices {
   }
 
   // 3. display payment sheet
-  Future<void> makePayment() async {
-    try {
-      await initPaymentSheet();
-      await Stripe.instance.presentPaymentSheet();
-    } on Exception catch (e) {
-      if (e is StripeException) {
-        log("Error from Stripe: ${e.error.localizedMessage}");
-      } else {
-        log("Unforeseen error: ${e}");
-      }
-    } catch (e) {
-      log("exception:$e");
-    }
+  Future<void> makePayment({
+    required PaymentIntentInputModel paymentDetails,
+  }) async {
+    await initPaymentSheet(payment: paymentDetails);
+    await Stripe.instance.presentPaymentSheet();
   }
 }
