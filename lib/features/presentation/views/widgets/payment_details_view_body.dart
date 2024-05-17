@@ -16,8 +16,6 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,4 +1,3 @@
-
 import 'package:easy_pay/core/utils/app_styles.dart';
 import 'package:easy_pay/features/presentation/views/widgets/custom_details_row.dart';
 import 'package:flutter/material.dart';

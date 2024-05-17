@@ -1,4 +1,3 @@
-
 import 'package:easy_pay/core/utils/app_styles.dart';
 import 'package:easy_pay/features/presentation/views/widgets/check_out_info_list.dart';
 import 'package:easy_pay/features/presentation/views/widgets/custom_divider.dart';

@@ -1,4 +1,3 @@
-
 import 'package:easy_pay/core/utils/app_images.dart';
 import 'package:easy_pay/features/presentation/views/widgets/payment_method_item.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ class PaymentMethodsList extends StatefulWidget {
   const PaymentMethodsList({
     super.key,
   });
-
 
   @override
   State<PaymentMethodsList> createState() => _PaymentMethodsListState();

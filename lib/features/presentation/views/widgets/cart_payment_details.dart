@@ -28,8 +28,7 @@ class CartPaymentDetials extends StatelessWidget {
           label: "Shipping",
           details: "\$8",
         ),
-                  CustomDivider(),
-
+        CustomDivider(),
         TotalPriceRowWidget(
           amount: '50.97',
         ),

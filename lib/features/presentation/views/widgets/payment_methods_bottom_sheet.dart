@@ -1,4 +1,4 @@
-
+import 'package:easy_pay/core/utils/stripe_services.dart';
 import 'package:easy_pay/core/widgets/custom_button.dart';
 import 'package:easy_pay/features/presentation/views/widgets/payment_methods_list.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +8,24 @@ class PaymentMethodsButtomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
+    return Padding(
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          PaymentMethodsList(),
-          SizedBox(
+          const PaymentMethodsList(),
+          const SizedBox(
             height: 32,
           ),
-          CustomPayButton(label: 'Continue'),
+          CustomPayButton(
+            label: 'Continue',
+            onTap: () async {
+              await StripeServices().makePayment();
+            },
+          ),
         ],
       ),
     );

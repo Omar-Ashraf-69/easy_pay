@@ -1,6 +1,6 @@
 class Assets {
   Assets._();
-  
+
   /// Assets for imagesArrow
   /// assets/images/arrow.svg
   static const String imagesArrow = "assets/images/arrow.svg";
@@ -23,10 +23,11 @@ class Assets {
 
   /// Assets for imagesSVGRepoIconCarrier
   /// assets/images/SVGRepo_iconCarrier.svg
-  static const String imagesSVGRepoIconCarrier = "assets/images/SVGRepo_iconCarrier.svg";
+  static const String imagesSVGRepoIconCarrier =
+      "assets/images/SVGRepo_iconCarrier.svg";
 
   /// Assets for imagesSVGRepoIconCarrier
   /// assets/images/SVGRepo_iconCarrier.png
-  static const String imagesSVGRepoIconCarrierSvg = "assets/images/SVGRepo_iconCarrier.png";
+  static const String imagesSVGRepoIconCarrierSvg =
+      "assets/images/SVGRepo_iconCarrier.png";
 }
-

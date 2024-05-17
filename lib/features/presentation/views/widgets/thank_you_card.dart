@@ -31,9 +31,8 @@ class ThankYouCard extends StatelessWidget {
           const Spacer(),
           const BarcodePaidRow(),
           SizedBox(
-              height:
-                  ((MediaQuery.sizeOf(context).height * 0.2 + 20) / 2) - 25,),
-          
+            height: ((MediaQuery.sizeOf(context).height * 0.2 + 20) / 2) - 25,
+          ),
         ],
       ),
     );
