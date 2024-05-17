@@ -1,4 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:easy_pay/core/utils/api_service.dart';
+import 'package:easy_pay/core/utils/stripe_services.dart';
 import 'package:easy_pay/core/widgets/custom_button.dart';
+import 'package:easy_pay/features/data/models/ephemeral_key_model/ephemeral_key_model.dart';
 import 'package:easy_pay/features/data/models/payment_intent_input_model.dart';
 import 'package:easy_pay/features/presentation/manager/checkout_cubit/checkout_cubit.dart';
 import 'package:easy_pay/features/presentation/manager/checkout_cubit/checkout_states.dart';
@@ -37,8 +41,10 @@ class CustomPayButtonConsumer extends StatelessWidget {
           isLoading: state is StripePaymentLoadingState,
           onTap: () async {
             await BlocProvider.of<StripePaymentCubit>(context).makePayment(
-              paymentDetails:
-                  const PaymentIntentInputModel(currency: 'usd', amount: '50'),
+              paymentDetails: const PaymentIntentInputModel(
+                  currency: 'usd',
+                  amount: '15',
+                  customerId: 'cus_Q7ki8LMHjORSSw'),
             );
           },
         );

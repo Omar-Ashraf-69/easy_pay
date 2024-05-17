@@ -26,14 +26,14 @@ class ApiService {
   Future<Map<String, dynamic>> post(
       {required String url,
       @required dynamic body,
+      Map<String, String>? headers,
       @required String? token}) async {
-    _dio.options.headers['Authorization'] = 'Bearer ${token ?? ""}';
     Response response = await _dio.post(
       url,
       data: body,
       options: Options(
-        headers: _dio.options.headers,
         contentType: 'application/x-www-form-urlencoded',
+        headers: headers ?? {'Authorization': 'Bearer ${token ?? ""}'},
       ),
     );
     return response.data;
