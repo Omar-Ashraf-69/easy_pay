@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:easy_pay/features/data/models/payment_intent_input_model.dart';
 import 'package:easy_pay/features/data/repos/checkout_repo_impl.dart';
 import 'package:easy_pay/features/presentation/manager/checkout_cubit/checkout_states.dart';
@@ -11,10 +10,9 @@ class StripePaymentCubit extends Cubit<StripePaymentStates> {
     emit(StripePaymentLoadingState());
     var data =
         await CheckoutRepoImpl().makePayment(paymentDetails: paymentDetails);
-    data.fold(
-        (failure) =>
-            emit(StripePaymentErrorState(error: failure.error.toString())),
-        (success) => emit(StripePaymentSuccessState()));
+    data.fold((failure) {
+      emit(StripePaymentErrorState(error: failure.error));
+    }, (success) => emit(StripePaymentSuccessState()));
   }
 
   @override

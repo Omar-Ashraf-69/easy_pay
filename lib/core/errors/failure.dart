@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 abstract class Failure {
   final String error;
@@ -8,7 +9,6 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   ServerFailure({required super.error});
-
   factory ServerFailure.fromDioError(DioException dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
@@ -31,20 +31,48 @@ class ServerFailure extends Failure {
     }
   }
   factory ServerFailure.fromResponse(int code, dynamic response) {
-    switch (code) {
-      case 400:
-      case 401:
-      case 403:
-        return ServerFailure(error: response['error']['message']);
-      case 404:
-        return ServerFailure(error: 'Your request not found');
-      case 500:
-      case 502:
-      case 503:
-        return ServerFailure(error: 'Internal server error, Please try again');
-      default:
-        return ServerFailure(
-            error: 'OOPs Something went wrong, Please try again');
+    if (response is Map<String, dynamic>) {
+      if (response.containsKey('error') &&
+          response['error'] is Map<String, dynamic> &&
+          response['error'].containsKey('message')) {
+        switch (code) {
+          case 400:
+          case 401:
+          case 403:
+            return ServerFailure(error: response['error']['message']);
+          case 404:
+            return ServerFailure(error: 'Your request not found');
+          case 500:
+          case 502:
+          case 503:
+            return ServerFailure(
+                error: 'Internal server error, Please try again');
+          default:
+            return ServerFailure(
+                error: 'OOPs Something went wrong, Please try again');
+        }
+      } else {
+        return ServerFailure(error: 'Unexpected response format');
+      }
+    } else if (response is String) {
+      switch (code) {
+        case 400:
+        case 401:
+        case 403:
+          return ServerFailure(error: response);
+        case 404:
+          return ServerFailure(error: 'Your request not found');
+        case 500:
+        case 502:
+        case 503:
+          return ServerFailure(
+              error: 'Internal server error, Please try again');
+        default:
+          return ServerFailure(
+              error: 'OOPs Something went wrong, Please try again');
+      }
+    } else {
+      return ServerFailure(error: 'Unexpected response format');
     }
   }
 }
@@ -55,4 +83,20 @@ class CacheFailure extends Failure {
 
 class NetworkFailure extends Failure {
   NetworkFailure({required super.error});
+}
+
+class StripeFailure extends Failure {
+  StripeFailure({required super.error});
+  factory StripeFailure.fromStripeException(StripeException stripeException) {
+    switch (stripeException.error.code) {
+      case FailureCode.Canceled:
+        return StripeFailure(error: stripeException.error.message!);
+      case FailureCode.Timeout:
+        return StripeFailure(error: stripeException.error.message!);
+      case FailureCode.Failed:
+        return StripeFailure(error: stripeException.error.message!);
+      default:
+        return StripeFailure(error: stripeException.error.message!);
+    }
+  }
 }
