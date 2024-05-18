@@ -1,14 +1,16 @@
-import 'package:dio/dio.dart';
-import 'package:easy_pay/core/utils/api_service.dart';
-import 'package:easy_pay/core/utils/stripe_services.dart';
+import 'dart:developer';
+
 import 'package:easy_pay/core/widgets/custom_button.dart';
-import 'package:easy_pay/features/data/models/ephemeral_key_model/ephemeral_key_model.dart';
-import 'package:easy_pay/features/data/models/payment_intent_input_model.dart';
+import 'package:easy_pay/features/data/models/items_list_model/item.dart';
+import 'package:easy_pay/features/data/models/items_list_model/items_list_model.dart';
+import 'package:easy_pay/features/data/models/payment_amount_model/details.dart';
+import 'package:easy_pay/features/data/models/payment_amount_model/payment_amount_model.dart';
 import 'package:easy_pay/features/presentation/manager/checkout_cubit/checkout_cubit.dart';
 import 'package:easy_pay/features/presentation/manager/checkout_cubit/checkout_states.dart';
 import 'package:easy_pay/features/presentation/views/thank_you_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 
 class CustomPayButtonConsumer extends StatelessWidget {
   const CustomPayButtonConsumer({
@@ -40,12 +42,64 @@ class CustomPayButtonConsumer extends StatelessWidget {
           label: 'Continue',
           isLoading: state is StripePaymentLoadingState,
           onTap: () async {
-            await BlocProvider.of<StripePaymentCubit>(context).makePayment(
-              paymentDetails: const PaymentIntentInputModel(
-                  currency: 'usd',
-                  amount: '15',
-                  customerId: 'cus_Q7ki8LMHjORSSw'),
+            PaymentAmountModel paymentAmountModel = PaymentAmountModel(
+              currency: 'USD',
+              total: '100',
+              details: PaymentAmountDetailsModel(
+                  shipping: '0', shippingDiscount: 0, subtotal: '100'),
             );
+            List<OrderItemModel> items = [
+              OrderItemModel(
+                currency: 'USD',
+                name: 'Apple',
+                price: '5',
+                quantity: 10,
+              ),
+              OrderItemModel(
+                currency: 'USD',
+                name: 'Apple',
+                price: '10',
+                quantity: 12,
+              ),
+            ];
+            OrderItemsListModel orderItemsListModel = OrderItemsListModel(
+              items: items,
+            );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => PaypalCheckoutView(
+                  sandboxMode: true,
+                  clientId: "YOUR CLIENT ID",
+                  secretKey: "YOUR SECRET KEY",
+                  transactions: [
+                    {
+                      "amount": paymentAmountModel.toJson(),
+                      "description": "The payment transaction description.",
+                      "item_list": orderItemsListModel.toJson(),
+                    }
+                  ],
+                  note: "Contact us for any questions on your order.",
+                  onSuccess: (Map params) async {
+                    log("onSuccess: $params");
+                    Navigator.pop(context);
+                  },
+                  onError: (error) {
+                    log("onError: $error");
+                    Navigator.pop(context);
+                  },
+                  onCancel: () {
+                    log('cancelled:');
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            );
+            // await BlocProvider.of<StripePaymentCubit>(context).makePayment(
+            //   paymentDetails: const PaymentIntentInputModel(
+            //       currency: 'usd',
+            //       amount: '15',
+            //       customerId: 'cus_Q7ki8LMHjORSSw'),
+            // );
           },
         );
       },
